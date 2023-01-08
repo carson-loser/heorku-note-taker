@@ -4,7 +4,8 @@ const path = require('path');
 const table = require('./db/db.json')
 // initializing express app
 const app = express();
-
+const uuid = require('uuid');
+const noteId = uuid.v4();
 // establishing port through heroku default or local 3001
 const PORT = process.env.PORT || 3001;
 
@@ -43,7 +44,7 @@ app.get('/api/notes/:title', (req, res) => {
     }
   }
 
-  // Return a message if the term doesn't exist in our DB
+  // Return a message if the title doesn't exist in our DB
   return res.json('No match found');
 });
 
@@ -57,26 +58,42 @@ app.post('/api/notes', (req, res) => {
   // console.info(req.rawHeaders);
   console.info(`${req.method} request received`);
 
-  let response;
+  const { title, text } = req.body;
 
-  if (req.body && req.body.title) {
-    response = {
-      status: 'success',
-      data: req.body
+  if (title && text) {
+    const newNote = {
+      title,
+      text,
+      note_id: uuid.v4(),
     };
-    res.json(`Review for ${response.data.title} has been added!`)
-  } else {
-    res.json('Request body must at least contain a product name');
-  }
 
-  console.log(req.body);
+    const pull = {
+      status: 'success',
+      body: newNote,
+    };
+
+    console.log(pull);
+    res.status(201).json(pull);
+  } else {
+    res.status(500).json('Error in posting review');
+  }
 });
 
-app.delete('/api/notes', (req, res) => {
-  res.json(`${req.method} request received`);
-  console.info(req.rawHeaders);
-  console.info(`${req.method} request received`);
-})
+
+//     res.json(`Request for ${response.data.title} has been added!`)
+//   } else {
+//     res.json('Request body must at least contain a title input');
+//   }
+
+//   console.log(req.body);
+//   // return res.json(table);
+// });
+
+// app.delete('/api/notes', (req, res) => {
+//   res.json(`${req.method} request received`);
+//   console.info(req.rawHeaders);
+//   console.info(`${req.method} request received`);
+// })
 
 // active port
 app.listen(PORT, () => console.log(`Listening on PORT: http://localhost:${PORT}`));

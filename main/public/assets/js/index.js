@@ -3,6 +3,8 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
+// const uuid = require('uuid');
+
 
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
