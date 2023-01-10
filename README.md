@@ -1,4 +1,4 @@
-# heroku-note-taker
+# Note Taker
 
 #### By Carson Loser
 
@@ -23,5 +23,12 @@
 
 # Heroku Link
 
-- https://drive.google.com/file/d/1NAV-9b-SGzD6hq-P6X-5BH08imeiMGyi/view
+- https://protected-fjord-89608.herokuapp.com/
+
+# Heroku Deployed App 
+
+- The following image demonstrates the web application's appearance
+
+
+![Screenshot of the deployed heroku web application](./assets/images/heroku-note-taker.png)
 
