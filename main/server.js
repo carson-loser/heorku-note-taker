@@ -95,6 +95,7 @@ app.post('/api/notes', (req, res) => {
         : console.log(
             `note with id: ${newNote.note_id} has been created into json file`
         )
+        console.log(newNote);
     })
     // new note with an id param
     const pull = {
